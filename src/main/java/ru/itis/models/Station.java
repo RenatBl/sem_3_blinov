@@ -10,5 +10,4 @@ import java.util.Set;
 public class Station {
     private Long id;
     private String name;
-    private Set<Bike> bikes;
 }
