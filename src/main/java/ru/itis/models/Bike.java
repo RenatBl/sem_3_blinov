@@ -8,16 +8,22 @@ import ru.itis.models.enums.Available;
 @NoArgsConstructor
 public class Bike {
     private Long id;
-    private Model model;
     private Integer year;
     private Double price;
     private Available available;
+    private Long model_id;
+    private Long station_id;
 
-    public boolean isAvailable(){
-        if (available.name().equals(Available.FREE.name())) {
-            return true;
-        } else {
-            return false;
-        }
+    public Bike(Integer year, Double price, Available available, Long model_id, Long station_id) {
+        this.year = year;
+        this.price = price;
+        this.available = available;
+        this.model_id = model_id;
+        this.station_id = station_id;
+    }
+
+    public boolean isAvailable() {
+        return available.name().equals("FREE");
     }
 }
+

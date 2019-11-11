@@ -3,21 +3,23 @@ package ru.itis.dao.impl;
 import ru.itis.dao.RowMapper;
 import ru.itis.dao.StationDao;
 import ru.itis.models.Station;
+import ru.itis.services.ConnectionService;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class StationDaoImpl implements StationDao {
     private Connection connection;
-    private RowMapper<Station> userFindRowMapper = row -> {
+    private RowMapper<Station> stationRowMapper = row -> {
         Long id = row.getLong("id");
         String name = row.getString("name");
         return new Station(id, name);
     };
 
-    public StationDaoImpl(Connection connection) {
-        this.connection = connection;
+    public StationDaoImpl() {
+        this.connection = ConnectionService.getConnection();
     }
 
     @Override
@@ -27,7 +29,7 @@ public class StationDaoImpl implements StationDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                station = userFindRowMapper.mapRow(resultSet);
+                station = stationRowMapper.mapRow(resultSet);
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
@@ -69,11 +71,11 @@ public class StationDaoImpl implements StationDao {
 
     @Override
     public List<Station> findAll() {
-        List<Station> stations = null;
+        List<Station> stations = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM stations")) {
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                stations.add(userFindRowMapper.mapRow(resultSet));
+            while (resultSet.next()) {
+                stations.add(stationRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);

@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionService {
-    public static Connection connection;
+    private static Connection connection;
     private final String url = "jdbc:postgresql://localhost:5432/sem_3";
     private final String name = "postgres";
     private final String password = "123990";
@@ -13,7 +13,7 @@ public class ConnectionService {
     private ConnectionService() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.connection = DriverManager.getConnection(url, name, password);
+            connection = DriverManager.getConnection(url, name, password);
         } catch (SQLException | ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
         }

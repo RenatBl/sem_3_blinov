@@ -12,13 +12,13 @@ public class HashingPassword {
     private static final int saltLen = 32;
     private static final int desiredKeyLen = 256;
 
-    public static String getSaltedHash(String password) throws Exception {
+    public String getSaltedHash(String password) throws Exception {
         byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
         // store the salt with the password
         return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
     }
 
-    public static boolean check(String password, String stored) throws Exception {
+    public boolean check(String password, String stored) throws Exception {
         String[] saltAndHash = stored.split("/$");
         if (saltAndHash.length != 2) {
             throw new IllegalStateException(

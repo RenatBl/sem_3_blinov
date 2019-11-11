@@ -6,13 +6,14 @@ import ru.itis.models.User;
 import ru.itis.services.ConnectionService;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
 
     private Connection connection;
-    private RowMapper<User> userFindRowMapper = row -> {
+    private RowMapper<User> userRowMapper = row -> {
         Long id = row.getLong("id");
         String username = row.getString("username");
         String password = row.getString("password");
@@ -34,11 +35,26 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                user = userFindRowMapper.mapRow(resultSet);
+                user = userRowMapper.mapRow(resultSet);
             }
 
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
+        }
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public Optional<User> findByUserName(String username) {
+        User user = null;
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?")) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = userRowMapper.mapRow(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
         }
         return Optional.ofNullable(user);
     }
@@ -82,11 +98,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        List<User> users = null;
+        List<User> users = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM users")) {
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                users.add(userFindRowMapper.mapRow(resultSet));
+            while (resultSet.next()) {
+                users.add(userRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);

@@ -11,4 +11,11 @@ public class Model {
     private String name;
     private String color;
     private String type;
+
+    public Model(String brand, String name, String color, String type) {
+        this.brand = brand;
+        this.name = name;
+        this.color = color;
+        this.type = type;
+    }
 }

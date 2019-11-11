@@ -13,23 +13,13 @@ public class Rent {
     private User user;
     private Bike bike;
     private Station start;
-    private Station finish;
     private Integer time;
     private Double cost;
     private Date startTime;
     private Date finishTime;
     private Status status;
 
-    public Double getCost() {
-        return bike.getPrice() * time;
-    }
-
-    public Integer getTime() {
-        Integer hours = finishTime.getHours() - finishTime.getHours();
-        if (hours > 1) {
-            return hours;
-        } else {
-            return 1;
-        }
+    public Boolean isPaid() {
+        return status.name().equals("PAID");
     }
 }
