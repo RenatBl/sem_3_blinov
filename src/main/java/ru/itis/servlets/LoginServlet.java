@@ -1,20 +1,15 @@
 package ru.itis.servlets;
 
-import com.google.gson.Gson;
 import ru.itis.dao.impl.UserDaoImpl;
 import ru.itis.dao.impl.UserFormDao;
 import ru.itis.forms.UserForm;
 import ru.itis.models.User;
-import ru.itis.services.Validator;
 import ru.itis.services.StringEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/login")
@@ -29,9 +24,8 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/templates/login.ftl").forward(request, response);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/templates/login.ftl").forward(req, resp);
     }
 
     @Override
@@ -40,9 +34,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         Optional<User> user = userDao.findByUserName(username);
         HttpSession session = req.getSession();
-        List<String> errors = Validator.validate(username, password, user);
-        Map<String, Object> data = new HashMap<>();
-        if (errors.size() == 0) {
+        if (user.isPresent()) {
             session.setAttribute("user", user.get().getId());
             String addToCookie;
             try {
@@ -50,23 +42,17 @@ public class LoginServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
-            this.saveAuthParam(user.get(), addToCookie);
-            Cookie authParam = this.getAuthCookie(addToCookie);
-            resp.addCookie(authParam);
-            data.put("redirect", "/main");
-        } else {
-            data.put("errors", errors);
+            this.saveParam(user.get(), addToCookie);
+            Cookie cookie = this.getCookie(addToCookie);
+            resp.addCookie(cookie);
         }
-        String json = new Gson().toJson(data);
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(json);
     }
 
-    private void saveAuthParam(User user, String addToCookie) {
+    private void saveParam(User user, String addToCookie) {
         this.userFormDao.save(new UserForm(addToCookie, user.getId()));
     }
 
-    private Cookie getAuthCookie(String value) {
+    private Cookie getCookie(String value) {
         Cookie cookie = new Cookie("cookie", value);
         cookie.setMaxAge(-1);
         return cookie;

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
-
     private Connection connection;
+
     private RowMapper<User> userRowMapper = row -> {
         Long id = row.getLong("id");
         String username = row.getString("username");

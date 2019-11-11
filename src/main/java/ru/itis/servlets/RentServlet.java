@@ -1,33 +1,26 @@
 package ru.itis.servlets;
 
-import ru.itis.dao.impl.RentDaoImpl;
-import ru.itis.models.Rent;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
-public class PayingServlet extends HttpServlet {
-    private RentDaoImpl rentDao;
-
+@WebServlet("/rent")
+public class RentServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
-        this.rentDao = new RentDaoImpl();
+        super.init();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Optional<Rent> rent = rentDao.find(Long.valueOf(req.getParameter("id")));
-        req.setAttribute("rent", rent);
-        req.getRequestDispatcher("/WEB-INF/templates/paying.ftl");
+        super.doGet(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long rent_id = Long.valueOf(req.getParameter("rent_id"));
 
     }
 }

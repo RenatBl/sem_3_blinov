@@ -35,7 +35,7 @@ public class SignUpServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String email = req.getParameter("email");
         try {
-            userDao.save(new User(username, hashingPassword.getSaltedHash(password), name, surname, phoneNumber, email));
+            userDao.save(new User(username, password, name, surname, phoneNumber, email));
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
