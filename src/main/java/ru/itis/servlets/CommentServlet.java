@@ -46,12 +46,15 @@ public class CommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Comment comment;
-        String text = (String) req.getAttribute("text");
+        String text = req.getParameter("text");
+        System.out.println(text);
         LocalDateTime date = LocalDateTime.now();
+        System.out.println(date.toString());
         HttpSession session = req.getSession();
         Long userId = (Long) session.getAttribute("user");
+        System.out.println(userId);
         comment = new Comment(text, userId, date);
         commentDao.save(comment);
-        req.getServletContext().getRequestDispatcher("/comments").forward(req, resp);
+        resp.sendRedirect("/comments");
     }
 }

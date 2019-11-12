@@ -1,7 +1,10 @@
+<#ftl encoding='UTF-8'>
+<#import "style.ftl" as s>
 <#macro page>
+    <@s.style/>
     <div id="header">
         <div class="header_name">
-            <span class="green">B</span>ike <span class="green">S</span>haring
+            <span class="green">B</span>ike<span class="green">S</span>haring
         </div>
 
         <div class="header_logo">
@@ -10,26 +13,28 @@
 
         <div class="header_logout">
             <form method="get" action="/logout">
-                <input type="submit" value="Выйти"/>
+                <input type="submit" value="Р’С‹Р№С‚Рё"/>
             </form>
         </div>
     </div>
+</#macro>
 
+<#macro menu>
     <div class="main_right">
         <div class="menu">
             <a href="/main">
-                <div class="menu_item active">Главная страница</div>
+                <div class="menu_item">Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°</div>
             </a>
             <a href="/profile">
-                <div class="menu_item">Профиль</div>
+                <div class="menu_item">РџСЂРѕС„РёР»СЊ</div>
             </a>
             <a href="/history">
-                <div class="menu_item">История заказов</div>
+                <div class="menu_item">РСЃС‚РѕСЂРёСЏ Р·Р°РєР°Р·РѕРІ</div>
             </a>
             <a href="/comments">
-                <div class="menu_item">Комментарии</div>
+                <div class="menu_item">РљРѕРјРјРµРЅС‚Р°СЂРёРё</div>
             </a>
         </div>
     </div>
-</div>
 </#macro>
+

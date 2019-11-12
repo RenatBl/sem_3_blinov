@@ -19,7 +19,7 @@ public class Rent {
     private LocalDateTime finishTime;
     private Status status;
 
-    /*public Rent(Long user_id, Long bike_id, Long start_station_id, Integer time, Double cost, LocalDateTime startTime,
+    public Rent(Long user_id, Long bike_id, Long start_station_id, Integer time, Double cost, LocalDateTime startTime,
                 LocalDateTime finishTime, Status status) {
         this.user_id = user_id;
         this.bike_id = bike_id;
@@ -29,7 +29,7 @@ public class Rent {
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.status = status;
-    }*/
+    }
 
     public Boolean isPaid() {
         return status.name().equals("PAID");

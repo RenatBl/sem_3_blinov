@@ -1,30 +1,43 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Обсуждение">
+<@h.html "РћР±СЃСѓР¶РґРµРЅРёРµ">
     <@p.page/>
-    <div class="comment-list">
-        <#if items?has_content>
-            <#list items as item>
-                <div class="com-user"><h3>${item.getKey().getUsername}</h3></div>
-                <div class="com-date">${item.getValue().getDate()}</div>
-                <div class="com-text">${item.getValue().getText()}</div>
-            </#list>
-        <#else>
-            <div class="com-error">Комментарии отсутсвуют</div>
-        </#if>
-    </div>
+    <div class="main">
+        <div class="main_left">
+            <h2>РћР±СЃСѓР¶РґРµРЅРёРµ</h2>
+            <div class="main_left_content">
+                <div class="stations_list">
+                    <#if items?has_content>
+                        <#list items as item>
+                            <div class="stations_list_item">
+                                <div class="stations_list_item_content">
+                                    <strong>${item.getValue().getUsername()}</strong>
+                                    <p>${item.getKey().getDate()}</p>
+                                    <p>${item.getKey().getText()}</p>
+                                </div>
+                            </div>
+                            </#list>
+                    </div>
+                    <#else>
+                        <div class="com-error">РљРѕРјРјРµРЅС‚Р°СЂРёРё РѕС‚СЃСѓС‚СЃРІСѓСЋС‚</div>
+                    </#if>
+                </div>
 
-    <div class="crt-comment">
-        <form method="post">
-        <div class="text-input">
-            <label>
-                Введите текст комментария: <textarea rows="4" cols="40" name="text"></textarea>
-            </label>
-        </div>
-            <div class="com-submit">
-                <input type="submit" value="Отправить">
+                <div style="float: right">
+                <form method="post">
+                    <div class="text-input">
+                        <label>
+                            Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ: <textarea rows="4" cols="40" name="text"></textarea>
+                        </label>
+                    </div>
+                    <div class="com-submit">
+                        <input type="submit" value="РћС‚РїСЂР°РІРёС‚СЊ">
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+<#--    </div>-->
+    <@p.menu/>
 </@h.html>

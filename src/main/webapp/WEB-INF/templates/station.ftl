@@ -1,31 +1,38 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Станция ${station.name}">
+<@h.html "РЎС‚Р°РЅС†РёСЏ ${station.name}">
     <@p.page/>
-    <div class="station-name"><h2>${station.name}</h2></div>
-    <div class="map"></div><#--Здесь позже нужно будет прикрепить скрипт с яндекс.картой-->
-    <#if error_no_station?has_content>
-        ${error_no_station}
-    <#else>
-        <#list items as item>
-            <div class="bike-station">
-                <div class="bike-station_info"><label>Название: ${item.getValue().getBrand()}</label></div>
-                <div class="bike-station_info"><label>Модель: ${item.getValue().getName()}</label></div>
-                <div class="bike-station_info"><label>Тип: ${item.getValue().getType()}</label></div>
-                <div class="bike-station_info"><label>Цена: ${item.getKey().getPrice()} рублей в час</label></div>
-                <div class="bike-station_info"><label>Статус: ${item.getKey().getAvailable()}</label></div>
-                <#--Потом написать обработку, чтобы вместо значений enum'a FREE, BROKEN, BUSY отображались
-                слова "Свободен", "Занят" и "Сломан"-->
-                <div class="follow">
-                    <form action="/bike" method="get">
-                        <input type="hidden" name="id" value="${item.getKey().getId()}">
-                        <input type="submit" value="Арендовать"/>
-                    </form>
-                    <#--Здесь надо будет написать скрипт, который проверяет состояние велосипеда. Если он занят или сломан,
-                     то кнопка disabled, если свободен, то кнопка активна-->
-                </div>
+    <div class="main">
+
+    <div class="main_left">
+
+        <h2>Р’РµР»РѕСЃРёРїРµРґС‹ РЅР° СЃС‚Р°РЅС†РёРё ${station.name}</h2>
+        <#if error_no_station?has_content>
+            ${error_no_station}
+        <#else>
+            <div class="stations_list">
+                <#list items as item>
+                    <div class="stations_list_item">
+                        <div class="stations_list_item_content">
+                            <p><strong>${item.getValue().getBrand()} (${item.getValue().getName()})</strong></p>
+                            <p>РўРёРї: ${item.getValue().getType()}</p>
+                            <p>Р¦РµРЅР°: ${item.getKey().getPrice()} - в‚Ѕ РІ С‡Р°СЃ</p>
+                            <form action="/bike" method="get">
+                                <input type="hidden" name="id" value="${item.getKey().getId()}">
+                                <p><input type="submit" class="btn btn-primary" value="РџРµСЂРµР№С‚Рё"/></p>
+                            </form>
+                        </div>
+                    </div>
+                </#list>
             </div>
-        </#list>
-    </#if>
+        </#if>
+    </div>
+    <div class="main_right_" style="float: right">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A628287bc834220e7447fd81d2720c2fcd450c9268209e7ff1ce8c23a2f819670&amp;source=constructor"
+                width="60%" height="320" frameborder="0" amrgin-left="20%" style="border:3px solid grey"></iframe>
+    </div>
+<#--    </div>-->
+    <@p.menu/>
 </@h.html>

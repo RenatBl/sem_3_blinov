@@ -1,26 +1,48 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "История заказов">
+<@h.html "РСЃС‚РѕСЂРёСЏ Р·Р°РєР°Р·РѕРІ">
     <@p.page/>
-    <#if error_no_rents?has_content>
-        ${error_no_rents}
-    <#else>
-        <#list rents as rent>
-            <div class="rent-history">
-                <div class="rent-history_info"><h4>${rent.startTime}</h4></div>
-                <div class="rent-history_info"><label>Начальная станция: ${rent.start}</label></div>
-                <div class="rent-history_info"><label>Конечная станция: ${rent.finish}</label></div>
-                <div class="rent-history_info"><label>Стоимость: ${rent.cost}</label></div>
-                <div class="rent-history_info"><label>Статус заказа: ${rent.status}</label></div>
-                <form action="paying.ftl" method="get">
-                    <input type="button" value="Оплатить">
-                    <#--Здесь надо будет написать скрипт, который проверяет статус заказа. Если он полачен, то кнопка disabled,
-                    если нет, то кнопка активна-->
-                </form>
+    <div class="main">
+
+        <div class="main_left">
+
+            <h2>РСЃС‚РѕСЂРёСЏ Р·Р°РєР°Р·РѕРІ</h2>
+            <div class="stations_list">
+
+                <#if rents?has_content>
+                <#list rents as rent>
+                    <div class="stations_list_item">
+                        <div class="stations_list_item_content">
+                            <p><strong>${rent.getValue().startTime}</strong></p>
+                            <p>РЈР»РёС†Р°: ${rent.getKey()}</p>
+                            <p>РЎС‚РѕРёРјРѕСЃС‚СЊ: ${rent.getValue().cost}</p>
+                            <#if rent.getValue().status == "PAID">
+                                <p>РЎС‚Р°С‚СѓСЃ: РћРїР»Р°С‡РµРЅРЅРѕ</p>
+                            <#else >
+                                <p>РЎС‚Р°С‚СѓСЃ: РќРµРѕРїР»Р°С‡РµРЅРЅРѕ</p>
+                            </#if>
+                            <form method="get" action="/pay">
+                                <p>
+                                    <input type="hidden" name="id" value="${rent.getValue().id}">
+                                    <button type="submit" id="pay" class="btn btn-primary">РћРїР»Р°С‚РёС‚СЊ</button>
+                                </p>
+                            </form>
+
+                        </div>
+                    </div>
+                </#list>
             </div>
-        </#list>
-        <div class="total_orders">${total}</div>
-        <div class="unpaid">${unpaid}</div>
-    </#if>
+
+        </div>
+        <div class="main_right">
+            <p>Total orders: ${total}</p>
+            <p>Unpaid: ${unpaid}</p>
+        </div>
+        <#else>
+            РСЃС‚РѕСЂРёСЏ Р·Р°РєР°Р·РѕРІ РїСѓСЃС‚Р°
+        </#if>
+<#--    </div>-->
+    <@p.menu/>
 </@h.html>

@@ -1,11 +1,31 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Профиль">
+<@h.html "РџСЂРѕС„РёР»СЊ">
     <@p.page/>
-    <div class="user_inf"><label>Имя аккаунта: ${user.username}</label></div>
-    <div class="user_inf"><label>Имя: ${user.name}</label></div>
-    <div class="user_inf"><label>Фамилия: ${user.surname}</label></div>
-    <div class="user_inf"><label>Email: ${user.email}</label></div>
-    <div class="user_inf"><label>Номер телефона: ${user.phoneNumber}</label></div>
+    <div class="main">
+        <div class="main_left">
+
+            <h2>РџСЂРѕС„РёР»СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</h2>
+
+            <div class="main_left_content">
+                <div class="main_left_left">
+                    <p>РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ:&nbsp;</p>
+                    <p>РРјСЏ:&nbsp;</p>
+                    <p>Р¤Р°РјРёР»РёСЏ:&nbsp;</p>
+                    <p>Email:&nbsp;</p>
+                    <p>РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°:&nbsp;</p>
+                </div>
+                <div class="main_left_right">
+                    <p>&nbsp;${user.getUsername()}</p>
+                    <p>&nbsp;${user.getName()}</p>
+                    <p>&nbsp;${user.getSurname()}</p>
+                    <p>&nbsp;${user.getEmail()}</p>
+                    <p>&nbsp;${user.getPhoneNumber()}</p>
+                </div>
+            </div>
+        </div>
+<#--    </div>-->
+    <@p.menu/>
 </@h.html>

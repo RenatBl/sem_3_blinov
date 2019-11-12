@@ -1,13 +1,33 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Оплата">
+<@h.html "РћРїР»Р°С‚Р°">
     <@p.page/>
-    <div class="rent_info_block">
-        <div class="rent_info"><h4>${rent.startTime}</h4></div>
-        <div class="rent_info"><label>Начальная станция: ${rent.start}</label></div>
-        <div class="rent_info"><label>Конечная станция: ${rent.finish}</label></div>
-        <div class="rent_info"><label>Стоимость: ${rent.cost}</label></div>
-        <input type="button" value="PAID"/>
+    <div class="main">
+
+    <div class="main_left">
+
+        <h2>РћРїР»Р°С‚Р° Р·Р°РєР°Р·Р°</h2>
+
+        <div class="main_left_content">
+            <div class="main_left_left">
+                <p>Р”Р°С‚Р°:&nbsp;</p>
+                <p>РЎС‚Р°РЅС†РёСЏ:&nbsp;</p>
+                <p>Р’СЂРµРјСЏ Р°СЂРµРЅРґС‹:&nbsp;</p>
+                <p>РЎС‚РѕРёРјРѕСЃС‚СЊ:&nbsp;</p>
+            </div>
+            <div class="main_left_right">
+                <p>&nbsp;${rent.startTime}</p>
+                <p>&nbsp;${station.name}</p>
+                <p>&nbsp;${rent.time}</p>
+                <p>&nbsp;${rent.cost} СЂСѓР±Р»РµР№</p>
+            </div>
+        </div>
+        <form method="post">
+            <p>&nbsp;<button type="submit" class="btn btn-outline-secondary btn-paying">Pay</button>
+            </p>
+        </form>
     </div>
+    <@p.menu/>
 </@h.html>

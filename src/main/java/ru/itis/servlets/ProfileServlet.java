@@ -23,8 +23,10 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        req.setAttribute("user", user);
+        Long id = (Long) session.getAttribute("user");
+        System.out.println(id);
+        System.out.println(userDao.find(id).toString());
+        req.setAttribute("user", userDao.find(id).get());
         req.getServletContext().getRequestDispatcher("/WEB-INF/templates/profile.ftl").forward(req, resp);
     }
 

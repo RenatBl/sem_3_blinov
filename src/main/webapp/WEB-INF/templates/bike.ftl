@@ -1,14 +1,36 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Велосипед">
+<@h.html "Р’РµР»РѕСЃРёРїРµРґ">
     <@p.page/>
-    <div class="bike">
-        <div class="bike_info"><label>Название: ${model.brand}</label></div>
-        <div class="bike_info"><label>Модель: ${model.name}</label></div>
-        <div class="bike_info"><label>Тип: ${model.type}</label></div>
-        <div class="bike_info"><label>Цвет: ${model.color}</label></div>
-        <div class="bike_info"><label>Год выпуска: ${bike.year}</label></div>
-        <div class="bike_info"><label>Цена: ${bike.price} рублей в час</label></div>
+    <div class="main">
+    <div class="main_left">
+        <div class="main_left_content">
+            <div class="main_left_left">
+                <p>РќР°Р·РІР°РЅРёРµ:&nbsp;</p>
+                <p>РњРѕРґРµР»СЊ:&nbsp;</p>
+                <p>РўРёРї:&nbsp;</p>
+                <p>Р¦РІРµС‚:&nbsp;</p>
+                <p>Р“РѕРґ:&nbsp;</p>
+                <p>Р¦РµРЅР°:&nbsp;</p>
+            </div>
+            <div class="main_left_right">
+                <p>&nbsp;${model.brand}</p>
+                <p>&nbsp;${model.name}</p>
+                <p>&nbsp;${model.type}</p>
+                <p>&nbsp;${model.color}</p>
+                <p>&nbsp;${bike.year}</p>
+                <p>&nbsp;${bike.price} - в‚Ѕ РІ С‡Р°СЃ</p>
+            </div>
+
+            <form action="/rent" method="get">
+                <input type="hidden" name="id" value="${bike.getId()}"/>
+                <input class="btn btn-outline-secondary" type="submit" value="РђСЂРµРЅРґРѕРІР°С‚СЊ"/>
+            </form>
+        </div>
     </div>
+
+    <@p.menu/>
+
 </@h.html>

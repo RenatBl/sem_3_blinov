@@ -23,7 +23,7 @@ public class UserFormDao {
     public void delete(Long id) {
         if (id < 0L) throw new IllegalArgumentException();
         try (Statement statement = connection.createStatement()) {
-            int updRows = statement.executeUpdate("DELETE from users_cookies where owner_id = id");
+            int updRows = statement.executeUpdate("DELETE from users_cookies where owner_id = " + id);
             if (updRows == 0) {
                 throw new SQLException();
             }

@@ -23,8 +23,8 @@ public class RentDaoImpl implements RentDao {
         Long start_station_id = row.getLong("start_station_id");
         Integer time = row.getInt("time");
         Double cost = row.getDouble("cost");
-        LocalDateTime start_time = row.getObject("7", LocalDateTime.class);
-        LocalDateTime finish_time = row.getObject("8", LocalDateTime.class);
+        LocalDateTime start_time = row.getObject("start_time", LocalDateTime.class);
+        LocalDateTime finish_time = row.getObject("finish_time", LocalDateTime.class);
         Status status = Status.valueOf(row.getString("status"));
         return new Rent(id, user_id, bike_id, start_station_id, time, cost, start_time, finish_time, status);
     };
@@ -48,7 +48,7 @@ public class RentDaoImpl implements RentDao {
         }
         return Optional.ofNullable(rent);
     }
-    private final String SQL_INSERT = "INSERT INTO users (user_id, bike_id, start_station_id, time, cost, start_time, " +
+    private final String SQL_INSERT = "INSERT INTO rents (user_id, bike_id, start_station_id, time, cost, start_time, " +
             "finish_time, status) VALUES (?,?,?,?,?,?,?,?)";
     @Override
     public void save(Rent model) {

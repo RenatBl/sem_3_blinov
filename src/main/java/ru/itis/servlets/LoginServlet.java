@@ -45,6 +45,9 @@ public class LoginServlet extends HttpServlet {
             this.saveParam(user.get(), addToCookie);
             Cookie cookie = this.getCookie(addToCookie);
             resp.addCookie(cookie);
+            resp.sendRedirect("/main");
+        } else {
+            resp.sendRedirect("/login");
         }
     }
 

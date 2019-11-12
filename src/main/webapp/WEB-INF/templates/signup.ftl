@@ -1,69 +1,72 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 
-<@h.html "Регистрация">
+<@h.html "Р РµРіРёСЃС‚СЂР°С†РёСЏ">
     <div class="card text-center">
         <div class="card-header" style="font-size:2em;">
-            Регистрация
+            Р РµРіРёСЃС‚СЂР°С†РёСЏ
         </div>
         <div class="card-body">
             <form method="post">
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Имя пользователя</label>
+                    <label for="username" class="col-sm-2 col-form-label">РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Введите имя пользователя">
+                        <input type="text" class="form-control" id="username" name="username" required
+                               placeholder="Р’РІРµРґРёС‚Рµ РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Имя</label>
+                    <label for="name" class="col-sm-2 col-form-label">РРјСЏ</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя">
+                        <input type="text" class="form-control" id="name" name="name" required
+                               placeholder="Р’РІРµРґРёС‚Рµ РёРјСЏ">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="surname" class="col-sm-2 col-form-label">Фамилия</label>
+                    <label for="surname" class="col-sm-2 col-form-label">Р¤Р°РјРёР»РёСЏ</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="surname" name="surname"
-                               placeholder="Введите фамилию">
+                        <input type="text" class="form-control" id="surname" name="surname" required
+                               placeholder="Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="phoneNumber" class="col-sm-2 col-form-label">Номер телефона</label>
+                    <label for="phoneNumber" class="col-sm-2 col-form-label">РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-                               placeholder="Введите номер телефона">
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required
+                               placeholder="Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Введите email">
+                        <input type="text" class="form-control" id="email" name="email" required
+                               placeholder="Р’РІРµРґРёС‚Рµ email">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="password" class="col-sm-2 col-form-label">Пароль</label>
+                    <label for="password" class="col-sm-2 col-form-label">РџР°СЂРѕР»СЊ</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password"
-                               placeholder="Введите пароль">
+                        <input type="password" class="form-control" id="password" name="password" required
+                               placeholder="Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="repeat" class="col-sm-2 col-form-label">Повторите пароль</label>
+                    <label for="repeat" class="col-sm-2 col-form-label">РџРѕРІС‚РѕСЂРёС‚Рµ РїР°СЂРѕР»СЊ</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="repeat" placeholder="Повторите пароль">
+                        <input type="password" class="form-control" id="repeat" required placeholder="РџРѕРІС‚РѕСЂРёС‚Рµ РїР°СЂРѕР»СЊ">
                     </div>
                 </div>
-                    <input type="submit" class="btn btn-primary" value="Регистрация" />
+                <input type="submit" class="btn btn-primary" value="Р РµРіРёСЃС‚СЂР°С†РёСЏ"/>
             </form>
         </div>
         <div class="card-footer text-muted">
-            Уже есть аккаунт? <a href="/login">Вход</a>
+            РЈР¶Рµ РµСЃС‚СЊ Р°РєРєР°СѓРЅС‚? <a href="/login">Р’С…РѕРґ</a>
         </div>
     </div>
 </@h.html>

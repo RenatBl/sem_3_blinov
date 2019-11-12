@@ -1,12 +1,17 @@
+<#ftl encoding='UTF-8'>
 <#import "parts/html.ftl" as h>
 <#import "parts/page.ftl" as p>
 
-<@h.html "Аренда">
-<div class="rent">
-    <form action="paying.ftl" method="post">
-        <div class="timer"><label>Время аренды: <input type="time"/></label></div>
-    <#--Здесь позже будет ajax для таймера аренды-->
-        <div class="stop_rent"><input type="submit" value="Закончить аренду"/></div>
-    </form>
-</div>
+<@h.html "РђСЂРµРЅРґР°">
+    <div class="main">
+        <div class="container">
+            <form method="post">
+                <input type="hidden" name="time" value="${time}"/>
+                <input type="hidden" name="id" value="${id}"/>
+                <p>
+                    <input class="btn btn-outline-secondary btn-paying" type="submit" value="Р—Р°РєРѕРЅС‡РёС‚СЊ Р°СЂРµРЅРґСѓ"/>
+                </p>
+            </form>
+        </div>
+    </div>
 </@h.html>

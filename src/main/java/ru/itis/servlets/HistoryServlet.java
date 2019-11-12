@@ -1,6 +1,8 @@
 package ru.itis.servlets;
 
+import javafx.util.Pair;
 import ru.itis.dao.impl.RentDaoImpl;
+import ru.itis.dao.impl.StationDaoImpl;
 import ru.itis.models.Rent;
 
 import javax.servlet.ServletException;
@@ -9,29 +11,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/history")
 public class HistoryServlet extends HttpServlet {
     private RentDaoImpl rentDao;
+    private StationDaoImpl stationDao;
 
     @Override
     public void init() throws ServletException {
         this.rentDao = new RentDaoImpl();
+        this.stationDao = new StationDaoImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Rent> rents = rentDao.findAll();
+        Pair<String, Rent> pair;
+        List<Pair<String, Rent>> pairs = new ArrayList<>();
         int total = rents.size();
+        System.out.println(total);
         int unpaid = 0;
         for (Rent rent: rents) {
+            pairs.add(new Pair<>(stationDao.find(rent.getStart_station_id()).get().getName(), rent));
             if (!rent.isPaid()) {
                 unpaid++;
             }
         }
+
         if (!rents.isEmpty()) {
-            req.setAttribute("rents", rents);
+            req.setAttribute("rents", pairs);
             req.setAttribute("total", total);
             req.setAttribute("unpaid", unpaid);
         } else {

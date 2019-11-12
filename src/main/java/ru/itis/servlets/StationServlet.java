@@ -40,7 +40,6 @@ public class StationServlet extends HttpServlet {
             Pair<Bike, Model> pair;
             List<Pair<Bike, Model>> pairs = new ArrayList<>();
             for (Bike bike : bikes) {
-//                models.add(modelDao.find(bike.getModel_id()).get());
                 pairs.add(new Pair<>(bike, modelDao.find(bike.getModel_id()).get()));
             }
             req.setAttribute("items", pairs);

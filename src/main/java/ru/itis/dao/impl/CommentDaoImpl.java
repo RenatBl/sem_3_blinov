@@ -44,12 +44,11 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public void save(Comment model) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO comments (text, user_id, date) VALUES (?,?,?)",
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO comments (text, user_id, pub_date) VALUES (?,?,?);",
                 Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, model.getText());
             statement.setLong(2, model.getUserId());
-            statement.setObject(3, model.getDate());
+            statement.setObject(3, LocalDateTime.now());
             int updRows = statement.executeUpdate();
             if (updRows == 0) {
                 throw new SQLException();
