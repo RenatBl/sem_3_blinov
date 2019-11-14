@@ -108,6 +108,20 @@ public class RentDaoImpl implements RentDao {
 
     }
 
+    public List<Rent> findAllByUserId(Long id) {
+        List<Rent> rents = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rents where user_id = "
+                + id + ";")) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                rents.add(rentRowMapper.mapRow(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return rents;
+    }
+
     @Override
     public List<Rent> findAll() {
         List<Rent> rents = new ArrayList<>();

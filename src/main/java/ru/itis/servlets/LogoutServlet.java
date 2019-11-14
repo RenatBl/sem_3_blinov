@@ -45,7 +45,7 @@ public class LogoutServlet extends HttpServlet {
                 resp.addCookie(cookie);
             }
         }
-        req.getRequestDispatcher("/WEB-INF/templates/login.ftl").forward(req, resp);
+        resp.sendRedirect("/login");
     }
 
     @Override
