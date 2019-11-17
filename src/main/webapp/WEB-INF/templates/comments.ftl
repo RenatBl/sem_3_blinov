@@ -7,8 +7,19 @@
     <div class="main">
         <div class="main_left">
             <h2>Обсуждение</h2>
-            <div class="main_left_content">
                 <div class="stations_list">
+                    <div>
+                        <form method="post">
+                            <div class="text-input">
+                                <label>
+                                    Введите текст комментария: <textarea rows="4" cols="40" name="text"></textarea>
+                                </label>
+                            </div>
+                            <div class="com-submit">
+                                <input type="submit" value="Отправить">
+                            </div>
+                        </form>
+                    </div>
                     <#if items?has_content>
                         <#list items as item>
                             <div class="stations_list_item">
@@ -23,20 +34,6 @@
                     <#else>
                         <div class="com-error">Комментарии отсутсвуют</div>
                     </#if>
-                </div>
-
-                <div style="float: right">
-                <form method="post">
-                    <div class="text-input">
-                        <label>
-                            Введите текст комментария: <textarea rows="4" cols="40" name="text"></textarea>
-                        </label>
-                    </div>
-                    <div class="com-submit">
-                        <input type="submit" value="Отправить">
-                    </div>
-                </form>
-            </div>
         </div>
 <#--    </div>-->
     <@p.menu/>

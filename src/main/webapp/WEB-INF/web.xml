@@ -54,7 +54,6 @@
     </servlet-mapping>
 
     <absolute-ordering>
-        <name>filter2</name>
         <name>filter1</name>
     </absolute-ordering>
 </web-app>

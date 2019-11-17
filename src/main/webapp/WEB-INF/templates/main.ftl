@@ -27,9 +27,5 @@
         </#if>
     </div>
     </div>
-    <div class="main_right">
-        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A628287bc834220e7447fd81d2720c2fcd450c9268209e7ff1ce8c23a2f819670&amp;source=constructor"
-                width="60%" height="320" frameborder="0" amrgin-left="20%" style="border:3px solid grey"></iframe>
-    </div>
-    <@p.menu/>
+    <@p.menu_with_map/>
 </@h.html>

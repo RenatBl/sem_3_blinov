@@ -19,17 +19,22 @@
                             <p>Улица: ${rent.getKey()}</p>
                             <p>Стоимость: ${rent.getValue().cost}</p>
                             <#if rent.getValue().status == "PAID">
-                                <p>Статус: Оплаченно</p>
+                                <p id="status">Статус: Оплачено</p>
+                                <form method="get" action="/pay">
+                                    <p>
+                                        <input type="hidden" name="id" value="${rent.getValue().id}">
+                                        <button type="submit" id="pay" class="btn btn-primary" disabled>Оплатить</button>
+                                    </p>
+                                </form>
                             <#else >
-                                <p>Статус: Неоплаченно</p>
+                                <p id="status">Статус: Неоплачено</p>
+                                <form method="get" action="/pay">
+                                    <p>
+                                        <input type="hidden" name="id" value="${rent.getValue().id}">
+                                        <button type="submit" id="pay" class="btn btn-primary">Оплатить</button>
+                                    </p>
+                                </form>
                             </#if>
-                            <form method="get" action="/pay">
-                                <p>
-                                    <input type="hidden" name="id" value="${rent.getValue().id}">
-                                    <button type="submit" id="pay" class="btn btn-primary">Оплатить</button>
-                                </p>
-                            </form>
-
                         </div>
                     </div>
                 </#list>
@@ -43,6 +48,5 @@
         <#else>
             История заказов пуста
         </#if>
-<#--    </div>-->
     <@p.menu/>
 </@h.html>
